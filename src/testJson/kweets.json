@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "creationDate": "11-11-2011",
+    "text": "My first kweet",
+    "username": "Bart"
+  },
+  {
+    "id": 2,
+    "creationDate": "12-11-2011",
+    "text": "My first kweet",
+    "username": "Karel"
+  },
+  {
+    "id": 3,
+    "creationDate": "12-11-2011",
+    "text": "My third kweet",
+    "username": "Peter"
+  },
+  {
+    "id": 4,
+    "creationDate": "12-11-2013",
+    "text": "My something kweet",
+    "username": "Jan"
+  },
+  {
+    "id": 5,
+    "creationDate": "12-11-2018",
+    "text": "Gratis bier!",
+    "username": "Marc"
+  }
+]

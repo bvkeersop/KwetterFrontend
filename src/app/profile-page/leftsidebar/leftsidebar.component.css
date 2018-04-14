@@ -1,0 +1,12 @@
+mat-list.scrollable {
+  height: 200px;
+  overflow-y: scroll;
+}
+
+.leftsidebar {
+  margin: 1em;
+}
+
+.margin-bottom {
+  margin-bottom: 1em;
+}

@@ -1,0 +1,10 @@
+.kweet {
+  margin: 1em;
+}
+
+.mat-card-avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}

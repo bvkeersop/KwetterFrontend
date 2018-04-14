@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+}
+
+.section {
+  flex: 1; /*grow*/
+}
+
+.midsection {
+  flex: 2; /*grow*/
+}
+
+@media (max-width: 768px) { /*breakpoint*/
+  .container {
+    flex-direction: column;
+  }
+}

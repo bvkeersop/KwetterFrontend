@@ -1,0 +1,16 @@
+<div class="fixed mat-elevation-z6">
+  <nav>
+    <mat-toolbar color="primary">
+      <span>Kwetter</span>
+      <span class="fill"></span>
+      <span>
+        <button routerLink="login" mat-button *ngIf="!loggedIn">
+          <i class="material-icons md-18">person</i> Login
+        </button>
+        <button mat-button (click)="logout()" *ngIf="loggedIn">
+          <i class="material-icons md-18">person</i> Welcome {{user.username}} Logout
+        </button>
+      </span>
+    </mat-toolbar>
+  </nav>
+</div>
