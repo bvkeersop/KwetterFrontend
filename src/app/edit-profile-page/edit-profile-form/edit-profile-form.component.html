@@ -1,0 +1,31 @@
+<mat-card class="center card-default-size">
+  <mat-card-header>
+    <mat-card-title>
+      <h2>Edit your profile</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
+    <form class="register-form">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="username" type="text" name="txtUsername" [(ngModel)]="username">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <textarea matInput placeholder="biography" type="text" name="txtBiography" [(ngModel)]="biography"></textarea>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="location" type="text" name="txtLocation" [(ngModel)]="location">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="website" type="text" name="txtWebsite" [(ngModel)]="website">
+      </mat-form-field>
+    </form>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="editProfile()">Save</button>
+    <button mat-button color="primary" routerLink="/home">Cancel</button>
+  </mat-card-actions>
+  <mat-card-footer>
+  </mat-card-footer>
+</mat-card>

@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import 'rxjs/add/operator/switchMap';
 import { UserService } from '../../services/user.service';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +22,10 @@ export class ProfileComponent implements OnInit {
 
   private subscription: Subscription;
 
-  constructor(private route: ActivatedRoute, private kweetService: KweetService, private userService: UserService) {
+  constructor(private route: ActivatedRoute,
+    private kweetService: KweetService,
+    private userService: UserService,
+    private profileService: ProfileService) {
 
     this.subscription = this.kweetService.kweets$.subscribe(kweets => {
       this.kweets = kweets;
@@ -34,7 +38,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getProfile(id) {
-
+    this.profileService.getProfile(id).subscribe(profile => this.profile = profile);
   }
 
   checkIsMyProfile(id) {
@@ -50,6 +54,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     let id = parseInt(this.route.snapshot.paramMap.get('id'));
     this.getKweets(id);
+    this.getProfile(id);
     this.checkIsMyProfile(id);
   }
 

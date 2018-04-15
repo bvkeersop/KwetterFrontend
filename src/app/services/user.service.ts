@@ -47,6 +47,13 @@ export class UserService {
     this._profile.next(user);
   }
 
+  updateUser(newUsername) {
+    let userObj = JSON.parse(localStorage.getItem(UserService.USER_KEY));
+    let user = new User(userObj.id, newUsername, userObj.avatar, userObj.email, userObj.token);
+    localStorage.setItem(UserService.USER_KEY, JSON.stringify(user));
+    this._profile.next(user);
+  }
+
   logout() {
     localStorage.removeItem(UserService.LOGGED_IN_KEY);
     localStorage.removeItem(UserService.USER_KEY);

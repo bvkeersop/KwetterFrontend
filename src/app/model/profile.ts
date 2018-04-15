@@ -6,6 +6,18 @@ export class Profile {
   location: string;
   biography: string;
   password: string;
+  website: string;
 
-  constructor() { }
+  constructor(username: string, biography: string, password: string, website: string, location: string) {
+    this.username = username;
+    this.biography = biography;
+    this.location = location;
+    this.website = website;
+    //this.password = password;
+  }
+
+  //This is not correct
+  setId(id) {
+    this.id = id;
+  }
 }

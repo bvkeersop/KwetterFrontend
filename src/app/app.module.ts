@@ -39,6 +39,9 @@ import { RightsidebarComponent } from './profile-page/rightsidebar/rightsidebar.
 import { UserService } from './services/user.service';
 import { KweetService } from './services/kweet.service';
 import { Authentication } from './interceptor/authentication.inceptor';
+import { ProfileService } from './services/profile.service';
+
+import { EditProfileFormComponent } from './edit-profile-page/edit-profile-form/edit-profile-form.component';
 
 const indexRoute: Route = { path: '', component: HomeComponent };
 const fallBackRoute: Route = { path: '**', component: HomeComponent };
@@ -49,6 +52,7 @@ const routes: Routes = [
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'login', component: LoginFormComponent },
   { path: 'register', component: RegisterFormComponent },
+  { path: 'edit-profile', component: EditProfileFormComponent },
   indexRoute,
   fallBackRoute
 ];
@@ -64,7 +68,8 @@ const routes: Routes = [
     LoginFormComponent,
     RegisterFormComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditProfileFormComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +85,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [UserService, KweetService, {
+  providers: [UserService, KweetService, ProfileService, {
     provide: HTTP_INTERCEPTORS,
     useClass: Authentication,
     multi: true
