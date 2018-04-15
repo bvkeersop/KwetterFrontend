@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(private userService: UserService, private router: Router) {
+
     this.subscription = this.userService.profile$.subscribe(user => {
       this.user = user;
       if (user !== null) {
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
       else this.loggedIn = false;
     });
+
 
     this.loggedIn = userService.isLoggedIn();
     this.user = userService.getUser();

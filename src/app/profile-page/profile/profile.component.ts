@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Profile } from "../../model/profile";
 import { KweetService } from '../../services/kweet.service';
 import { Kweet } from '../../model/kweet'
+import { Subscription } from 'rxjs/Subscription';
 
 import 'rxjs/add/operator/switchMap';
 import { UserService } from '../../services/user.service';
@@ -18,7 +19,14 @@ export class ProfileComponent implements OnInit {
   profile: Profile;
   isMyProfile: boolean;
 
+  private subscription: Subscription;
+
   constructor(private route: ActivatedRoute, private kweetService: KweetService, private userService: UserService) {
+
+    this.subscription = this.kweetService.kweets$.subscribe(kweets => {
+      this.kweets = kweets;
+    });
+
   }
 
   getKweets(id) {

@@ -15,7 +15,7 @@ import { User } from '../model/user';
 export class KweetService {
 
   private _kweets: BehaviorSubject<Kweet[]> = new BehaviorSubject<Kweet[]>([]);
-  public readonly kweets = this._kweets.asObservable();
+  kweets$ = this._kweets.asObservable();
 
   public static readonly GET_ALL_KWEETS_URL = "http://localhost:8080/Kwetter/api/kweet/getAllKweets";
   public static readonly GET_KWEETSBYPROFILEID_URL = "http://localhost:8080/Kwetter/api/kweet/getKweetsByProfileId/";
@@ -31,10 +31,13 @@ export class KweetService {
   }
 
   getKweetsByProfileId(id): Observable<Kweet[]> {
-    return this.http.get<Kweet[]>(KweetService.GET_KWEETSBYPROFILEID_URL + id)
-      .pipe(
-        catchError(this.handleError('getKweetsByProfileId', []))
-      );
+    this._kweets.next([]);
+
+    const request = this.http.get<Kweet[]>(KweetService.GET_KWEETSBYPROFILEID_URL + id);
+    request.subscribe(result => {
+      this._kweets.next(result as Kweet[]);
+    })
+    return request;
   }
 
   createKweet(kweet: Kweet) {
@@ -43,6 +46,7 @@ export class KweetService {
         (res) => {
           console.log("POST call successful value returned in body",
             res);
+          this.getKweetsByProfileId(this.userService.getUser().id);
         },
         response => {
           console.log("POST call in error", response);
