@@ -1,3 +1,6 @@
+//Haven't found a way to make use of multiple constructors yet
+//Bypassing this with getters and setters, very messy, needs to be FIXED
+
 export class Profile {
   id: number;
   username: string;
@@ -19,5 +22,13 @@ export class Profile {
   //This is not correct
   setId(id) {
     this.id = id;
+  }
+
+  setEmail(email: string) {
+    this.email = email;
+  }
+
+  setPassword(password: string) {
+    this.password = password;
   }
 }
