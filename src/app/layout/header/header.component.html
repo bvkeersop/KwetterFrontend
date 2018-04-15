@@ -7,9 +7,15 @@
         <button routerLink="login" mat-button *ngIf="!loggedIn">
           <i class="material-icons md-18">person</i> Login
         </button>
-        <button mat-button (click)="logout()" *ngIf="loggedIn">
-          <i class="material-icons md-18">person</i> Welcome {{user.username}} Logout
-        </button>
+        <div *ngIf="loggedIn">
+          <a (click)="myProfile()">
+            <i class="material-icons md-18">person</i>
+            {{user.username}}
+          </a>
+          <button mat-button (click)="logout()">
+            Logout
+          </button>
+        </div>
       </span>
     </mat-toolbar>
   </nav>

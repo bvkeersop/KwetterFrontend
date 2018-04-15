@@ -3,9 +3,11 @@
     <app-leftsidebar></app-leftsidebar>
   </div>
   <div class="midsection">
-    <app-kweets></app-kweets>
+    <app-kweets [kweets]="kweets"></app-kweets>
   </div>
   <div class="section">
-    <app-rightsidebar></app-rightsidebar>
+    <div *ngIf="isMyProfile">
+      <app-rightsidebar></app-rightsidebar>
+    </div>
   </div>
 </div>

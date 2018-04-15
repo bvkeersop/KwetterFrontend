@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes, Route } from '@angular/router'
+import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //Material imports
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -35,6 +37,8 @@ import { ProfileComponent } from './profile-page/profile/profile.component';
 import { LeftsidebarComponent } from './profile-page/leftsidebar/leftsidebar.component';
 import { RightsidebarComponent } from './profile-page/rightsidebar/rightsidebar.component';
 import { UserService } from './services/user.service';
+import { KweetService } from './services/kweet.service';
+import { Authentication } from './interceptor/authentication.inceptor';
 
 const indexRoute: Route = { path: '', component: HomeComponent };
 const fallBackRoute: Route = { path: '**', component: HomeComponent };
@@ -73,9 +77,14 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
+    HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [UserService],
+  providers: [UserService, KweetService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: Authentication,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

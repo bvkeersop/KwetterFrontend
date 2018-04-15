@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { Component, OnInit, Input } from '@angular/core';
+import { Kweet } from '../model/kweet';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-kweets',
@@ -7,14 +8,16 @@ import { Http } from '@angular/http';
   styleUrls: ['./kweets.component.css']
 })
 export class KweetsComponent implements OnInit {
-  kweets = [];
 
-  constructor(private http: Http) {
+  @Input()
+  kweets: Kweet[];
 
-    this.http.get('./testJson/kweets.json').subscribe(res => {
-      this.kweets = res.json();
-    });
+  constructor(private router: Router) {
+  }
 
+  goToProfile(id) {
+    console.log("click");
+    this.router.navigate(['profile', id]);
   }
 
   ngOnInit() {

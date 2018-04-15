@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { KweetService } from '../../services/kweet.service';
+import { Kweet } from '../../model/kweet'
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  kweets: Kweet[];
+
+  constructor(private kweetService: KweetService) { }
 
   ngOnInit() {
+    this.getAllKweets();
+  }
+
+  getAllKweets() {
+    console.log("Getting kweets");
+    this.kweetService.getAllKweets().subscribe(kweets => this.kweets = kweets);
+    console.log(this.kweets);
   }
 
 }

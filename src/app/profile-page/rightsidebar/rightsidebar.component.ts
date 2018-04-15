@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { KweetService } from '../../services/kweet.service';
+import { Kweet } from '../../model/kweet';
 
 @Component({
   selector: 'app-rightsidebar',
@@ -7,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RightsidebarComponent implements OnInit {
 
-  constructor() { }
+  kweetText: string;
+  isMyProfile: boolean = false;
+
+  constructor(private kweetService: KweetService) { }
+
+  createKweet() {
+    let date = new Date().toLocaleString();
+    let kweet = new Kweet(this.kweetText);
+    this.kweetService.createKweet(kweet);
+  }
 
   ngOnInit() {
   }

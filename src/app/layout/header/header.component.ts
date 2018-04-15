@@ -31,7 +31,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout() {
     this.userService.logout();
-    this.router.navigate(['Home']);
+    this.router.navigate(['home']);
+  }
+
+  myProfile() {
+    console.log("click");
+    this.router.navigate(['profile', this.user.id]);
   }
 
   getLoggedIn(): void {

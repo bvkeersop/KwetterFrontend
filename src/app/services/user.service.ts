@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptionsArgs } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 import { User } from '../model/user';
@@ -24,15 +24,12 @@ export class UserService {
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
 
-    this.http.post
-
     return this.http.post(UserService.LOGIN_URL, JSON.stringify({ email, password }), { headers })
       .subscribe(
         (res) => {
           console.log("POST call successful value returned in body",
             res);
           this.createUser(res.text());
-          localStorage.setItem(UserService.USER_KEY, JSON.stringify(res));
         },
         response => {
           console.log("POST call in error", response);
@@ -46,6 +43,7 @@ export class UserService {
     let userObj = JSON.parse(u);
     let user = new User(userObj.id, userObj.username, userObj.avatar, userObj.email, userObj.token);
     localStorage.setItem(UserService.USER_KEY, JSON.stringify(user));
+    localStorage.setItem(UserService.LOGGED_IN_KEY, "true");
     this._profile.next(user);
   }
 
@@ -56,11 +54,14 @@ export class UserService {
   }
 
   isLoggedIn() {
-    console.log(localStorage.getItem(UserService.LOGGED_IN_KEY));
     return !!localStorage.getItem(UserService.LOGGED_IN_KEY);
   }
 
   getUser() {
     return JSON.parse(localStorage.getItem(UserService.USER_KEY));
+  }
+
+  getToken() {
+    return JSON.parse(localStorage.getItem(UserService.USER_KEY)).token;
   }
 }

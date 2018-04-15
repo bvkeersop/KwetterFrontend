@@ -1,16 +1,12 @@
-export interface IKweet {
-  publicId: string;
-  textContent: string;
-  date: Date;
-}
+import { Profile } from '../model/profile';
 
-export class Kweet implements IKweet {
+export class Kweet {
+  id: string;
+  text: string;
+  creationDate: Date;
 
-  publicId: string = this.kweet.publicId;
-  textContent: string = this.kweet.textContent;
-  date: Date = this.kweet.date;
-
-  constructor(public kweet: IKweet) {
+  constructor(text) {
+    this.text = text;
   }
 
 }

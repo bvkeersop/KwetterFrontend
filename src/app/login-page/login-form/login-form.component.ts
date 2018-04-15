@@ -9,13 +9,13 @@ import { Router } from '@angular/router'
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router) {
+  email: string;
+  password: string;
 
-  }
+  constructor(private userService: UserService, private router: Router) { }
 
   login() {
-    console.log('login called');
-    this.userService.login("email", "password");
+    this.userService.login(this.email, this.password);
     this.router.navigate(['Home']);
   }
 
