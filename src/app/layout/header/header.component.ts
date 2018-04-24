@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Profile } from '../../model/profile';
+import { User } from '../../model/user';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,7 @@ import { Profile } from '../../model/profile';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   private loggedIn = false;
-  private user;
+  private user: User;
 
   private subscription: Subscription;
 
@@ -36,9 +37,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigate(['home']);
   }
 
+  home() {
+    this.router.navigate(['home']);
+  }
+
   myProfile() {
     console.log("click");
-    this.router.navigate(['profile', this.user.id]);
+    this.router.navigate(['profile', this.userService.getUser().id]);
   }
 
   getLoggedIn(): void {

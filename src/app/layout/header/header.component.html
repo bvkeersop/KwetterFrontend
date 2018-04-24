@@ -1,7 +1,9 @@
 <div class="fixed mat-elevation-z6">
   <nav>
     <mat-toolbar color="primary">
-      <span>Kwetter</span>
+      <span>
+        <a (click)="home()">Kwetter</a>
+      </span>
       <span class="fill"></span>
       <span>
         <button routerLink="login" mat-button *ngIf="!loggedIn">

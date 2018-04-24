@@ -22,7 +22,7 @@ export class RegisterFormComponent implements OnInit {
     profile.setEmail(this.email);
     profile.setPassword(this.password);
     this.profileService.createProfile(profile);
-    this.router.navigate(['home']);
+    //this.router.navigate(['home']);
   }
 
   ngOnInit() {

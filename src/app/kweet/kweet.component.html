@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar class="mat-card-avatar" style="background-image:url('https://material.angular.io/assets/img/examples/shiba1.jpg')">
+    </div>
+    <mat-card-title>
+      <a (click)="goToProfile(kweet.owner.id)">
+        {{kweet.owner.username}}
+      </a>
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{kweet.owner.location}}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p> {{kweet.text}} </p>
+  </mat-card-content>
+  <mat-card-actions *ngIf="userService.isLoggedIn()">
+    Likes: {{ kweet.likedBy.length }}
+    <button mat-button *ngIf="!isLikedByMe()" (click)="toggleLike(kweet)">
+      <i class="material-icons md-18">mood</i> LIKE
+    </button>
+    <button mat-button *ngIf="isLikedByMe()" (click)="toggleLike(kweet)">
+      <i class="material-icons md-18">mood_bad</i> UNLIKE
+    </button>
+  </mat-card-actions>
+</mat-card>

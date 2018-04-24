@@ -14,19 +14,12 @@ export class LeftsidebarComponent implements OnInit {
   profile: Profile;
   @Input()
   isMyProfile: boolean;
-
-  followers = [];
-  following = [];
+  @Input()
+  followers: Profile[];
+  @Input()
+  following: Profile[];
 
   constructor(private http: Http, private profileService: ProfileService) {
-
-    this.http.get('./testJson/followers.json').subscribe(res => {
-      this.followers = res.json();
-    });
-
-    this.http.get('./testJson/following.json').subscribe(res => {
-      this.following = res.json();
-    });
   }
 
   followProfile(id) {
@@ -34,6 +27,13 @@ export class LeftsidebarComponent implements OnInit {
     let profile = new Profile(null, null, null, null, null);
     profile.setId(id);
     this.profileService.followProfile(profile);
+  }
+
+  isProfileDefined() {
+    if (this.profile == undefined) {
+      return false;
+    }
+    else return true;
   }
 
   ngOnInit() {

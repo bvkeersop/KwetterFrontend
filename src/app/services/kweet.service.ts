@@ -17,9 +17,12 @@ export class KweetService {
   private _kweets: BehaviorSubject<Kweet[]> = new BehaviorSubject<Kweet[]>([]);
   kweets$ = this._kweets.asObservable();
 
+
   public static readonly GET_ALL_KWEETS_URL = "http://localhost:8080/Kwetter/api/kweet/getAllKweets";
   public static readonly GET_KWEETSBYPROFILEID_URL = "http://localhost:8080/Kwetter/api/kweet/getKweetsByProfileId/";
   public static readonly CREATE_KWEET_URL = "http://localhost:8080/Kwetter/api/kweet/createKweet";
+  public static readonly LIKE_KWEET_URL = "http://localhost:8080/Kwetter/api/kweet/likeKweet";
+  public static readonly UNLIKE_KWEET_URL = "http://localhost:8080/Kwetter/api/kweet/unlikeKweet";
 
   constructor(private http: HttpClient, private userService: UserService) { }
 
@@ -47,6 +50,38 @@ export class KweetService {
           console.log("POST call successful value returned in body",
             res);
           this.getKweetsByProfileId(this.userService.getUser().id);
+        },
+        response => {
+          console.log("POST call in error", response);
+        },
+        () => {
+          console.log("The POST observable is now completed.");
+        });
+  }
+
+  likeKweet(kweet: Kweet) {
+    return this.http.post<Kweet>(KweetService.LIKE_KWEET_URL, kweet)
+      .subscribe(
+        (res) => {
+          console.log("POST call successful value returned in body",
+            res);
+          //TODO: update view
+        },
+        response => {
+          console.log("POST call in error", response);
+        },
+        () => {
+          console.log("The POST observable is now completed.");
+        });
+  }
+
+  unlikeKweet(kweet: Kweet) {
+    return this.http.post<Kweet>(KweetService.UNLIKE_KWEET_URL, kweet)
+      .subscribe(
+        (res) => {
+          console.log("POST call successful value returned in body",
+            res);
+          //TODO: update view
         },
         response => {
           console.log("POST call in error", response);

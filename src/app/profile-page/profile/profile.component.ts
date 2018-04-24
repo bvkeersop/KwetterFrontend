@@ -18,9 +18,13 @@ export class ProfileComponent implements OnInit {
 
   kweets: Kweet[];
   profile: Profile;
+  followers: Profile[];
+  following: Profile[];
   isMyProfile: boolean;
 
   private subscription: Subscription;
+  private subscription_followers: Subscription;
+  private subscription_following: Subscription;
 
   constructor(private route: ActivatedRoute,
     private kweetService: KweetService,
@@ -31,6 +35,13 @@ export class ProfileComponent implements OnInit {
       this.kweets = kweets;
     });
 
+    this.subscription_followers = this.profileService.followers$.subscribe(followers => {
+      this.followers = followers;
+    });
+
+    this.subscription_followers = this.profileService.following$.subscribe(following => {
+      this.following = following;
+    });
   }
 
   getKweets(id) {
@@ -39,6 +50,14 @@ export class ProfileComponent implements OnInit {
 
   getProfile(id) {
     this.profileService.getProfile(id).subscribe(profile => this.profile = profile);
+  }
+
+  getFollowers(id) {
+    this.profileService.getFollowers(id).subscribe(followers => this.followers = followers);
+  }
+
+  getFollowing(id) {
+    this.profileService.getFollowing(id).subscribe(following => this.following = following);
   }
 
   checkIsMyProfile(id) {
@@ -55,6 +74,8 @@ export class ProfileComponent implements OnInit {
     let id = parseInt(this.route.snapshot.paramMap.get('id'));
     this.getKweets(id);
     this.getProfile(id);
+    this.getFollowers(id);
+    this.getFollowing(id);
     this.checkIsMyProfile(id);
   }
 

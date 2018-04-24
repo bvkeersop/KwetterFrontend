@@ -20,6 +20,7 @@ import { AppComponent } from './app.component';
 
 //General components
 import { KweetsComponent } from './kweets/kweets.component';
+import { KweetComponent } from './kweet/kweet.component';
 
 //Layout components
 import { HeaderComponent } from './layout/header/header.component';
@@ -62,6 +63,7 @@ const routes: Routes = [
     AppComponent,
     HeaderComponent,
     KweetsComponent,
+    KweetComponent,
     LeftsidebarComponent,
     RightsidebarComponent,
     LoginComponent,
