@@ -1,12 +1,12 @@
-<div style="text-align:center; margin-top: 150px;">
+<div>
+  {{ notification.message }}
 
-  <h1 style="font-size: 4em;">
+  <form class="register-form">
+    <mat-form-field class="full-width">
+      <input matInput placeholder="message" type="text" name="text" required="required" [(ngModel)]="text">
+    </mat-form-field>
+  </form>
 
-    Notifications :
-    <span style="color: red;"> {{ notification.message }} </span>
-
-  </h1>
-
-  <button (click)="sendMsg()">Send Message</button>
+  <button mat-button color="primary" (click)="sendMsg()">Send Message</button>
 
 </div>

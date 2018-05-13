@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../services/notification.service';
+import { UserService } from '../services/user.service';
 import { Notification } from './../model/notification';
-import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-notifications',
@@ -11,38 +11,23 @@ import { Subscription } from 'rxjs/Subscription';
 export class NotificationsComponent implements OnInit {
 
   notification: Notification;
+  text: string;
 
-  private notificationSubscription: Subscription;
-
-  constructor(private notificationService: NotificationService) {
+  constructor(private notificationService: NotificationService, private userService: UserService) {
 
     if (this.notification == null) {
       this.notification = new Notification("", "");
     }
-
-    this.notificationSubscription = this.notificationService.notification$.subscribe(notification => {
+    notificationService._notification.subscribe(notification => {
+      console.log("---notification has been updated---")
       this.notification = notification;
     });
-
-    /*
-    notificationService.notification.subscribe(notification => {
-      console.log("Response from websocket: " + notification.message);
-      this.notification = notification;
-    });
-    */
-  }
-
-  private message = {
-    sender: 'tutorialedge',
-    message: 'this is a test message'
   }
 
   sendMsg() {
-    console.log('new message from client to websocket: ', this.message);
-    this.notificationService.notification.next(this.message);
-    this.message.message = '';
+    let newNot = new Notification(this.userService.getUser(), this.text);
+    this.notificationService.sendMessage(newNot);
   }
-
 
   ngOnInit() {
   }

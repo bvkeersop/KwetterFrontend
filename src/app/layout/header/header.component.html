@@ -4,7 +4,9 @@
       <span>
         <a (click)="home()">Kwetter</a>
       </span>
-      <span class="fill"></span>
+      <span class="fill">
+      </span>
+      <span> {{ notification.message }} </span>
       <span>
         <button routerLink="login" mat-button *ngIf="!loggedIn">
           <i class="material-icons md-18">person</i> Login

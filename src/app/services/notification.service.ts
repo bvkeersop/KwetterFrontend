@@ -1,37 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx';
+import { Observable, Subject, ReplaySubject, BehaviorSubject } from 'rxjs/Rx';
 import { WebsocketService } from './websocket.service';
 import { Notification } from './../model/notification'
 
 const NOTIFICATION_URL = 'ws://localhost:8080/Kwetter/socket'
 
+
 @Injectable()
 export class NotificationService {
 
-  public notification: Subject<Notification>;
-  notification$ = this.notification.asObservable();
+  public _notification: ReplaySubject<Notification>;
 
-  constructor(wsService: WebsocketService) {
+  constructor(websocketService: WebsocketService) {
 
-    if (this.notification == null) {
-      let def = new Notification("", "");
-      this.notification.next(def);
-    }
-
-    this.notification = <Subject<Notification>>wsService
+    this._notification = <ReplaySubject<Notification>>websocketService
       .connect(NOTIFICATION_URL)
       .map((response: MessageEvent): Notification => {
-        let data = response.data;
-
-        let notification = new Notification("sender", data);
-
-        this.notification.next(notification);
-
+        let data = JSON.parse(response.data);
         return {
-          sender: "tmp",
+          sender: data.author,
           message: data.message
         }
-
       });
+  }
+
+  sendMessage(message) {
+    console.log("---calling .next()---");
+    this._notification.next(message);
   }
 }
