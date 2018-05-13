@@ -11,7 +11,7 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button *ngIf="!isMyProfile" (click)="followProfile(profile.id)">Follow</button>
+      <button mat-button *ngIf="!isMyProfile && isLoggedIn()" (click)="followProfile(profile.id)">Follow</button>
       <button mat-button *ngIf="isMyProfile" routerLink="/edit-profile">Edit</button>
     </mat-card-actions>
   </mat-card>

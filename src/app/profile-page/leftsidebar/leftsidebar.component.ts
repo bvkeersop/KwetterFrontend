@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Http } from '@angular/http';
 import { Profile } from './../../model/profile';
 import { ProfileService } from '../../services/profile.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-leftsidebar',
@@ -19,7 +20,7 @@ export class LeftsidebarComponent implements OnInit {
   @Input()
   following: Profile[];
 
-  constructor(private http: Http, private profileService: ProfileService) {
+  constructor(private http: Http, private profileService: ProfileService, private userService: UserService) {
   }
 
   followProfile(id) {
@@ -35,6 +36,11 @@ export class LeftsidebarComponent implements OnInit {
     }
     else return true;
   }
+
+  isLoggedIn() {
+    return this.userService.isLoggedIn();
+  }
+
 
   ngOnInit() {
   }

@@ -37,12 +37,18 @@ import { LoginComponent } from './login-page/login/login.component';
 import { ProfileComponent } from './profile-page/profile/profile.component';
 import { LeftsidebarComponent } from './profile-page/leftsidebar/leftsidebar.component';
 import { RightsidebarComponent } from './profile-page/rightsidebar/rightsidebar.component';
+import { EditProfileFormComponent } from './edit-profile-page/edit-profile-form/edit-profile-form.component';
+
+//Services
 import { UserService } from './services/user.service';
 import { KweetService } from './services/kweet.service';
 import { Authentication } from './interceptor/authentication.inceptor';
 import { ProfileService } from './services/profile.service';
+import { WebsocketService } from './services/websocket.service';
 
-import { EditProfileFormComponent } from './edit-profile-page/edit-profile-form/edit-profile-form.component';
+//Websockets
+import { NotificationsComponent } from './notifications/notifications.component';
+import { NotificationService } from './services/notification.service';
 
 const indexRoute: Route = { path: '', component: HomeComponent };
 const fallBackRoute: Route = { path: '**', component: HomeComponent };
@@ -54,6 +60,7 @@ const routes: Routes = [
   { path: 'login', component: LoginFormComponent },
   { path: 'register', component: RegisterFormComponent },
   { path: 'edit-profile', component: EditProfileFormComponent },
+  { path: 'notifications', component: NotificationsComponent },
   indexRoute,
   fallBackRoute
 ];
@@ -71,7 +78,8 @@ const routes: Routes = [
     RegisterFormComponent,
     HomeComponent,
     ProfileComponent,
-    EditProfileFormComponent
+    EditProfileFormComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +95,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [UserService, KweetService, ProfileService, {
+  providers: [UserService, KweetService, ProfileService, WebsocketService, NotificationService, {
     provide: HTTP_INTERCEPTORS,
     useClass: Authentication,
     multi: true
